@@ -1,10 +1,5 @@
 import React from "react";
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  Navigate,
-} from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import Dashboard from "./pages/dashboard/page";
 import AdminLoginPage from "./pages/login/page";
 import { AuthProvider, useAuth } from "./context/AuthContext";
@@ -37,37 +32,32 @@ const App: React.FC = () => {
   return (
     <CustomThemeProvider>
       <AuthProvider>
-        <Router>
-          <Routes>
-            <Route
-              path="/login"
-              element={
-                <PublicRoute>
-                  <AdminLoginPage />
-                </PublicRoute>
-              }
-            />
+        <Routes>
+          <Route
+            path="/login"
+            element={
+              <PublicRoute>
+                <AdminLoginPage />
+              </PublicRoute>
+            }
+          />
 
-            <Route
-              path="/"
-              element={
-                <ProtectedRoute>
-                  <Layout />
-                </ProtectedRoute>
-              }
-            >
-              <Route path="/" element={<Dashboard />} />
-              <Route path="/users/list" element={<UserManagementPage />} />
-              <Route path="/users/add" element={<AddUserPage />} />
-              <Route
-                path="/transactions"
-                element={<TransactionHistoryPage />}
-              />
-              <Route path="*" element={<Navigate to="/" replace />} />
-            </Route>
-          </Routes>
-          <ToastContainer />
-        </Router>
+          <Route
+            path="/"
+            element={
+              <ProtectedRoute>
+                <Layout />
+              </ProtectedRoute>
+            }
+          >
+            <Route path="/" element={<Dashboard />} />
+            <Route path="/users/list" element={<UserManagementPage />} />
+            <Route path="/users/add" element={<AddUserPage />} />
+            <Route path="/transactions" element={<TransactionHistoryPage />} />
+            <Route path="*" element={<Navigate to="/" replace />} />
+          </Route>
+        </Routes>
+        <ToastContainer />
       </AuthProvider>
     </CustomThemeProvider>
   );
